@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        .nav-link {
+            @apply text-gray-800 hover:text-primary transition-colors duration-300 relative group text-sm sm:text-base;
+        }
+
+        .nav-link::after {
+            content: "";
+            @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full;
+        }
+
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
@@ -310,7 +319,15 @@
         <nav class="glass-effect px-4 sm:px-6 py-4">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
                 <a href="#accueil" class="text-2xl font-['Pacifico'] text-primary mb-4 sm:mb-0">Amboara</a>
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+
+                <!-- Hamburger button -->
+                <button id="menu-toggle" class="sm:hidden text-3xl text-primary focus:outline-none">
+                    <i class="ri-menu-line"></i>
+                </button>
+
+                <!-- Navigation links -->
+                <div id="menu"
+                    class="hidden sm:flex flex-wrap justify-center gap-4 sm:gap-6 flex-col sm:flex-row w-full sm:w-auto">
                     <a href="#accueil"
                         class="text-gray-800 hover:text-primary transition-colors duration-300 relative group text-sm sm:text-base">
                         Accueil
@@ -346,8 +363,10 @@
                         Contact
                     </a>
                 </div>
+            </div>
         </nav>
     </header>
+
     <main>
         <section id="accueil"
             class="min-h-screen flex items-center justify-center relative overflow-hidden pt-28 sm:pt-20">
@@ -1165,6 +1184,21 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+                navLinks.classList.toggle('flex');
+                navLinks.classList.toggle('flex-col');
+                navLinks.classList.toggle('gap-4');
+                navLinks.classList.toggle('mt-4');
+            });
+        });
+    </script>
+
     <script id="cursor-animation">
         document.addEventListener('DOMContentLoaded', function () {
             const cursor = document.getElementById('custom-cursor');
